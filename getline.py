@@ -44,6 +44,7 @@ for trip in shared_trips:
 print shared_routes
 
 find_line_from_route="SELECT * FROM routes WHERE route_id=?"
+print "Lines are:"
 for route in shared_routes:
     cur.execute(find_line_from_route,(route,))
     res=cur.fetchone()
