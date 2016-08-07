@@ -3,12 +3,28 @@ import sqlite3
 conn= sqlite3.connect('mymov.db')
 cur=conn.cursor()
 
-find_origin_stop_id="SELECT * FROM stops WHERE stop_code='25635'"
-cur.execute(find_origin_stop_id)
+
+def getStop():
+    origin_code=raw_input('Enter Origin code station\n')
+    destination_code=raw_input('Enter Destination code station\n')
+    return origin_code, destination_code
+
+def getTOA():
+    TOA=raw_input('Enter your time of arrivel')
+    return TOA
+
+
+origin_code,destination_code=getStop()
+print origin_code,destination_code
+
+find_origin_stop_id='SELECT * FROM stops WHERE stop_code={0)'.format(origin_code)
+
+
+cur.execute(find_origin_stop_id,(origin_code,))
 origin_id=cur.fetchone()[0]  #change to fetchone instide all
 
-find_dest_stop_id="SELECT * FROM stops WHERE stop_code='21127'"
-cur.execute(find_dest_stop_id)
+find_dest_stop_id="SELECT * FROM stops WHERE stop_code=?"
+cur.execute(find_dest_stop_id,(destination_code,))
 dest_id=cur.fetchone()[0]
 print "Origin id: ",origin_id
 print "Destination id: ",dest_id
@@ -48,7 +64,7 @@ lines=[]
 for route in shared_routes:
     cur.execute(find_line_from_route,(route,))
     res= cur.fetchone()
-    lines.append(res[2])
+    lines.append(res[2]) # 2 is route short name which is line number
 
 print "Lines are:", set(lines)
 conn.close()

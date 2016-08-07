@@ -1,7 +1,9 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- encoding: utf-8-*-
 import sqlite3
 import sys
+
+
 
 conn = sqlite3.connect('mymov.db')
 cur = conn.cursor()
