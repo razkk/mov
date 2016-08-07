@@ -17,7 +17,7 @@ def getTOA():
 origin_code,destination_code=getStop()
 print origin_code,destination_code
 
-find_origin_stop_id='SELECT * FROM stops WHERE stop_code={0)'.format(origin_code)
+find_origin_stop_id="SELECT * FROM stops WHERE stop_code=?"
 
 
 cur.execute(find_origin_stop_id,(origin_code,))
